@@ -1,17 +1,15 @@
 {
-"update_url": "https://clients2.google.com/service/update2/crx",
-
+  "update_url": "https://clients2.google.com/service/update2/crx",
   "manifest_version": 3,
   "name": "FUT Trader Hub",
-  "version": "1.4.0",
-  "description": "FUT Trader Hub – auto-logs sold items and overlays real-sales Fair Value badges on the FUT Web App.",
+  "version": "1.4.1",
+  "description": "FUT Trader Hub - auto-logs sold items, overlays real-sales Fair Value badges, and includes the FUTHub helper controls on the FUT Web App.",
   "permissions": ["storage", "identity", "notifications"],
   "host_permissions": [
     "*://*.ea.com/*",
     "*://*.easports.com/*",
     "https://api.futhub.co.uk/*",
     "https://backend-production-1f1a.up.railway.app/*"
-
   ],
   "background": { "service_worker": "sw.js" },
   "options_page": "options.html",
@@ -34,11 +32,19 @@
       ],
       "js": ["content.js"],
       "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.ea.com/*",
+        "*://*.easports.com/*"
+      ],
+      "js": ["helper-injector.js", "helper-autobuild.js"],
+      "run_at": "document_idle"
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["inject.js"],
+      "resources": ["inject.js", "page/page-helper.js", "assets/wand.svg"],
       "matches": [
         "*://*.ea.com/*",
         "*://*.easports.com/*"
