@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>FUT Trader Hub - Extension Settings</title>
+  <link rel="stylesheet" href="theme.css">
+  <style>
+    .premium-section {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.1) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .premium-section.active {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+    .premium-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .premium-header h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .crown-icon {
+      font-size: 20px;
+    }
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 8px 0;
+      font-size: 14px;
+    }
+    .feature-list .check {
+      color: var(--success);
+      font-weight: bold;
+    }
+    .feature-list .cross {
+      color: var(--danger);
+      font-weight: bold;
+    }
+    .upgrade-btn {
+      background: linear-gradient(90deg, #f59e0b, #d97706);
+      color: #000;
+      font-weight: 600;
+      margin-top: 12px;
+    }
+    .upgrade-btn:hover {
+      background: linear-gradient(90deg, #d97706, #b45309);
+    }
+    .premium-active-btn {
+      background: linear-gradient(90deg, var(--success), #059669);
+      color: #fff;
+      pointer-events: none;
+    }
+    .warning-box {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 8px;
+      padding: 12px;
+      margin: 12px 0;
+      color: #fecaca;
+    }
+    .success-box {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 8px;
+      padding: 12px;
+      margin: 12px 0;
+      color: #86efac;
+    }
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body class="bg">
+  <div class="container">
+    <div class="header">
+      <div class="title">
+        <img src="icons/icon32.png" alt="Logo">
+        FUT Trader Hub
+        <span class="badge">Extension Settings</span>
+      </div>
+      <div id="statusPill" class="pill off">Checking...</div>
+    </div>
+
+    <!-- Premium Status Section -->
+    <div id="premiumSection" class="premium-section">
+      <div class="premium-header">
+        <span class="crown-icon">👑</span>
+        <h2 id="premiumTitle">Premium Status</h2>
+      </div>
+      
+      <div id="premiumContent">
+        <p id="premiumDescription">Checking premium status...</p>
+        
+        <ul class="feature-list">
+          <li>
+            <span class="check" id="autoLogIcon">✗</span>
+            <span>Automatic trade logging from FUT Web App</span>
+          </li>
+          <li>
+            <span class="check" id="realTimeIcon">✗</span>
+            <span>Real-time sync to dashboard</span>
+          </li>
+          <li>
+            <span class="check" id="smartDetectionIcon">✗</span>
+            <span>Smart buy price detection</span>
+          </li>
+          <li>
+            <span class="check" id="notificationsIcon">✗</span>
+            <span>Trade notifications</span>
+          </li>
+        </ul>
+        
+        <button id="premiumAction" class="btn upgrade-btn">
+          Checking...
+        </button>
+      </div>
+    </div>
+
+    <!-- Connection Section -->
+    <div class="card">
+      <h3>Account Connection</h3>
+      <div class="row">
+        <label>Status:</label>
+        <span id="connectionStatus">Checking...</span>
+      </div>
+      
+      <div id="warningBox" class="warning-box" style="display: none;">
+        <strong>Premium Required:</strong> The Chrome extension requires a Premium subscription to function.
+      </div>
+      
+      <div id="successBox" class="success-box" style="display: none;">
+        <strong>Ready:</strong> Extension is connected and ready to auto-log your trades!
+      </div>
+      
+      <div class="btn-group">
+        <button id="connect" class="btn primary">Connect with Dashboard</button>
+        <button id="signout" class="btn">Sign Out</button>
+      </div>
+    </div>
+
+    <!-- Manual Token Section (for advanced users) -->
+    <div class="card">
+      <h3>Manual Token (Advanced)</h3>
+      <div class="row">
+        <label>Token:</label>
+        <input type="password" id="token" placeholder="Paste your bearer token here">
+      </div>
+      <button id="save" class="btn">Save Token</button>
+      <p class="hint">
+        Advanced users can manually paste their bearer token from the dashboard.
+      </p>
+    </div>
+
+    <!-- Market Data / Fair Value Overlays -->
+    <div class="card">
+      <h3>Fair Value Price Overlays</h3>
+      <p class="hint" style="margin-top: -4px;">
+        Shows a STEAL / UNDER / FAIR / OVERPAY badge on cards in the Transfer
+        Market, based on real completed sales - not just the listed price.
+        Powered by the Public Data API, separate from the login above.
+      </p>
+      <div class="row">
+        <label>API Key:</label>
+        <input type="password" id="marketApiKey" placeholder="futhub_...">
+      </div>
+      <div class="row" style="align-items: center;">
+        <label style="width: auto; margin-right: 8px;">
+          <input type="checkbox" id="overlaysEnabled" checked style="width: auto; margin-right: 6px;">
+          Show overlays in the FUT Web App
+        </label>
+      </div>
+      <button id="saveMarketKey" class="btn">Save</button>
+      <div id="marketKeyStatus" class="status-block"></div>
+      <p class="hint">
+        Generate a key from your dashboard's <strong>API Keys</strong> page
+        (requires Pro+). Free tier is 5,000 requests/month - plenty for
+        normal browsing.
+      </p>
+    </div>
+
+    <!-- Test Section -->
+    <div class="card">
+      <h3>Test Connection</h3>
+      <button id="test" class="btn">Send Test Trade</button>
+      <div id="oauthStatus" class="status-block"></div>
+      <p class="hint">
+        Sends a test trade to verify your connection is working.
+      </p>
+    </div>
+
+    <!-- Usage Instructions -->
+    <div class="card">
+      <h3>How to Use</h3>
+      <ol style="color: var(--muted); font-size: 14px; line-height: 1.6;">
+        <li><strong>Connect:</strong> Click "Connect with Dashboard" above</li>
+        <li><strong>Premium:</strong> Ensure you have an active Premium subscription</li>
+        <li><strong>Visit FUT Web App:</strong> Go to the EA Sports FC Web App</li>
+        <li><strong>Sell Items:</strong> Sell players as normal</li>
+        <li><strong>Click "Record & Clear":</strong> Use the lime button that appears next to "Clear Sold"</li>
+        <li><strong>Check Dashboard:</strong> Trades automatically appear in your dashboard</li>
+      </ol>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
