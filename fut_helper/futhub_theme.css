@@ -1,0 +1,47 @@
+
+/* === FUTHub Theme Override === */
+:root {
+  --futhub-lime: #39FF14;
+  --futhub-dark: #0b0f10;
+  --futhub-dark-2: #070a0b;
+  --futhub-text: #e6ffe6;
+  --futhub-accent: #79ff6b;
+}
+html, body {
+  background: var(--futhub-dark);
+  color: var(--futhub-text);
+}
+/* Primary buttons */
+.btn-standard, .btn-primary, button.primary, #auto-sbc-button, #auto_sbc_button, #futhub-button {
+  background: var(--futhub-lime) !important;
+  color: #0b0f10 !important;
+  border: none !important;
+  box-shadow: 0 6px 16px rgba(57,255,20,0.35);
+  border-radius: 10px;
+  font-weight: 700;
+}
+.btn-standard:hover, .btn-primary:hover, button.primary:hover, #auto-sbc-button:hover, #futhub-button:hover {
+  filter: brightness(0.92);
+  transform: translateY(-1px);
+}
+/* Secondary & cards */
+.card, .panel, .container, .modal, .dropdown-menu, .menu, .nav {
+  background: var(--futhub-dark-2) !important;
+  color: var(--futhub-text) !important;
+  border: 1px solid rgba(121,255,107,0.08) !important;
+  border-radius: 16px;
+}
+a, .link, .nav a {
+  color: var(--futhub-lime) !important;
+}
+/* Icon button (wand) */
+.futhub-wand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.futhub-wand svg {
+  width: 18px; height: 18px;
+}
+/* Hide any old flag emoji background if present */
+.flag-icon, .autosbc-flag, .icon-flag { display:none !important; }

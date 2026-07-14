@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>FUTHub Helper</title>
+  <style>
+    :root { --bg:#0a0a0a; --card:#121212; --lime:#adff2f; --muted:#8a8a8a; }
+    html,body { margin:0; padding:0; background:var(--bg); color:#fff; font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif; }
+    .wrap { width: 300px; padding: 14px; }
+    .heading { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+    .heading img { width:24px; height:24px; }
+    .title { font-weight:700; letter-spacing:.3px; }
+    .card { background:var(--card); border:1px solid #1f1f1f; border-radius:14px; padding:12px; }
+    .row { display:flex; align-items:center; justify-content:space-between; }
+    .hint { color:var(--muted); font-size:12px; margin-top:10px; line-height:1.3; }
+    .switch { position:relative; width:48px; height:28px; background:#333; border-radius:28px; cursor:pointer; }
+    .knob { position:absolute; top:3px; left:3px; width:22px; height:22px; background:#fff; border-radius:50%; transition:all .2s ease; }
+    .on .switch { background:var(--lime); }
+    .on .knob { transform:translateX(20px); }
+    a { color: var(--lime); text-decoration: none; }
+  </style>
+  <link rel="stylesheet" href="futhub_theme.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="heading">
+      <img src="icons/icon32.png" alt="FUTHub" />
+      <div class="title">FUTHub Dashboard Helper</div>
+    </div>
+    <div id="card" class="card">
+      <div class="row">
+        <div>Enable on ea.com</div>
+        <div id="toggle" class="switch"><div class="knob"></div></div>
+      </div>
+      <div class="hint">
+        Injects helper logic into the EA FC Web App. Use responsibly and at your own risk.
+      </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+{
+  "manifest_version": 3,
+  "name": "FUTHub Dashboard Helper",
+  "version": "0.2.0",
+  "description": "Helper injection for the EA FC Web App. Branded for FUTHub Dashboard.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "branding/futhub_logo_16.png",
+      "32": "branding/futhub_logo_32.png",
+      "48": "branding/futhub_logo_48.png",
+      "128": "branding/futhub_logo_128.png",
+      "64": "branding/futhub_logo_64.png",
+      "256": "branding/futhub_logo_256.png",
+      "512": "branding/futhub_logo_512.png"
+    }
+  },
+  "icons": {
+    "16": "branding/futhub_logo_16.png",
+    "32": "branding/futhub_logo_32.png",
+    "48": "branding/futhub_logo_48.png",
+    "128": "branding/futhub_logo_128.png",
+    "64": "branding/futhub_logo_64.png",
+    "256": "branding/futhub_logo_256.png",
+    "512": "branding/futhub_logo_512.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "*://*.ea.com/*",
+    "*://*.ea2.com/*",
+    "*://*.FUTHub.app/*",
+    "https://FUTHub.app/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.ea.com/*",
+        "*://ea.com/*"
+      ],
+      "js": [
+        "content/injector.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.ea.com/*",
+        "https://ea.com/*",
+        "https://*.ea.com/fifa/*",
+        "https://*.ea.com/ea-sports-fc/*",
+        "https://*.ea.com/games/*"
+      ],
+      "js": [
+        "futhub_inject.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "page/page-helper.js"
+      ],
+      "matches": [
+        "*://*.ea.com/*",
+        "*://ea.com/*"
+      ]
+    }
+  ]
+}
