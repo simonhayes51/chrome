@@ -1,0 +1,51 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+  "manifest_version": 3,
+  "name": "FUT Trader Hub",
+  "version": "1.4.0",
+  "description": "FUT Trader Hub – auto-logs sold items and overlays real-sales Fair Value badges on the FUT Web App.",
+  "permissions": ["storage", "identity", "notifications"],
+  "host_permissions": [
+    "*://*.ea.com/*",
+    "*://*.easports.com/*",
+    "https://api.futhub.co.uk/*",
+    "https://backend-production-1f1a.up.railway.app/*"
+
+  ],
+  "background": { "service_worker": "sw.js" },
+  "options_page": "options.html",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "FUT Trader Hub",
+    "default_icon": "icons/icon32.png"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.ea.com/*",
+        "*://*.easports.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["inject.js"],
+      "matches": [
+        "*://*.ea.com/*",
+        "*://*.easports.com/*"
+      ]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  }
+}
